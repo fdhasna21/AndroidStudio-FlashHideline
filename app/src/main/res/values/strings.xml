@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name" translatable="false">Flash Hideline</string>
+
+<!-- Network   -->
+    <string name="server_down">Server is under maintenance, please try again later</string>
+    <string name="cannot_connect_toserver">Unable to communicate with server, please try again later or please check the latest application</string>
+    <string name="no_internet_connection">Network issue, check your internet connection and please try again later</string>
+
+<!-- Dialog   -->
+    <string name="warning">Warning</string>
+    <string name="ok" translatable="false">OK</string>
+</resources>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<!-- Network -->
+    <string name="server_down">Server sedang dalam pemeliharaan, cobalah beberapa saat lagi</string>
+    <string name="cannot_connect_toserver">Tidak dapat berkomunikasi dengan sever, coba beberapa saat lagi atau silakan cek aplikasi terbaru</string>
+    <string name="no_internet_connection">Masalah jaringan, cek koneksi internet Anda dan silakan coba lagi</string>
+
+<!-- Dialog -->
+    <string name="warning">Peringatan</string>
+</resources>
