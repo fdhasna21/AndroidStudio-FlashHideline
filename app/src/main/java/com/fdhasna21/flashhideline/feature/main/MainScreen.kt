@@ -31,7 +31,6 @@ import com.fdhasna21.flashhideline.core.base.BaseViewModel.UiState
 import com.fdhasna21.flashhideline.core.theme.FlashHidelineTheme
 import com.fdhasna21.flashhideline.core.utils.Constants
 import com.fdhasna21.flashhideline.core.utils.component.ThemePreviews
-import com.fdhasna21.flashhideline.feature.webview.WebViewActivity
 import com.fdhasna21.flashhideline.feature.webview.WebViewContent
 
 /**
@@ -39,19 +38,22 @@ import com.fdhasna21.flashhideline.feature.webview.WebViewContent
  * **/
 
 @Composable
-fun MainScreen(viewModel: MainViewModel) {
+fun MainScreen(
+    viewModel: MainViewModel,
+    onOpenWebView: (String) -> Unit
+) {
     val context = LocalContext.current
     BaseScreen(
         viewModel = viewModel,
         showBackButton = false
     ) { data ->
-        MainContent(context)
+        MainContent(onOpenWebView)
     }
 }
 
 @Composable
 fun MainContent(
-    context: Context
+    onOpenWebView: (String) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -63,10 +65,7 @@ fun MainContent(
 
         Button(
             onClick = {
-                BaseActivity.gotoActivity<WebViewActivity>(
-                    context = context,
-                    Constants.EXTRA.STRING to "https://google.com"
-                )
+                onOpenWebView(Constants.DEFAULT.URL)
             },
             modifier = Modifier.fillMaxWidth()
         ) {
@@ -83,7 +82,7 @@ fun MainContent(
 fun MainScreenPreview() {
     FlashHidelineTheme {
         BaseContent<String>() {
-            MainContent(context = LocalContext.current)
+            MainContent{}
         }
     }
 }

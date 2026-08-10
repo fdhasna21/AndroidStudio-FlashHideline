@@ -25,6 +25,7 @@ import androidx.compose.runtime.setValue
 import com.fdhasna21.flashhideline.core.base.BaseContent
 import com.fdhasna21.flashhideline.core.base.BaseScreen
 import com.fdhasna21.flashhideline.core.base.BaseViewModel.UiState
+import com.fdhasna21.flashhideline.core.utils.Constants
 
 /**
  * Created by Fernanda Hasna on 11/08/2026.
@@ -126,7 +127,7 @@ fun WebViewContent(
 private fun WebViewScreenPreview() {
     FlashHidelineTheme {
         BaseContent<String>(
-            uiState = UiState.Success("https://google.com"),
+            uiState = UiState.Success(Constants.DEFAULT.URL),
             showBackButton = true
         ) { url ->
             WebViewContent(url = url ?: "")

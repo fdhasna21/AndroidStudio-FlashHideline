@@ -6,7 +6,9 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.runtime.Composable
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.navigation.compose.rememberNavController
 import com.fdhasna21.flashhideline.core.base.BaseActivity
+import com.fdhasna21.flashhideline.navigation.AppNavHost
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -17,7 +19,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : BaseActivity<MainViewModel>() {
     @Composable
     override fun Content(viewModel: MainViewModel) {
-        MainScreen(viewModel = viewModel)
+        val navController = rememberNavController()
+        AppNavHost(navController = navController)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

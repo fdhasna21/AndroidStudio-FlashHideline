@@ -8,7 +8,10 @@ object Constants {
     const val BASE_URL = "https://newsapi.org/v2/"
 
     object EXTRA {
-       const val STRING = "EXTRA_STRING"
-       const val PARCELABLE = "EXTRA_PARCELABLE"
+       const val ENCODED_URL = "encodedURL"
+    }
+
+    object DEFAULT {
+        const val URL = "https://google.com"
     }
 }

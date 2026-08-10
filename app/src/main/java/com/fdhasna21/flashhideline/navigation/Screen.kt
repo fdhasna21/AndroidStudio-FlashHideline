@@ -1,5 +1,6 @@
 package com.fdhasna21.flashhideline.navigation
 
+import com.fdhasna21.flashhideline.core.utils.Constants
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
 
@@ -9,7 +10,7 @@ import java.nio.charset.StandardCharsets
 
 sealed class Screen(val route: String) {
     object Main : Screen("main_screen")
-    object WebView : Screen("webview_screen/{url}") {
+    object WebView : Screen("webview_screen/{${Constants.EXTRA.ENCODED_URL}}") {
         fun createRoute(url: String): String {
             val encodedUrl = URLEncoder.encode(url, StandardCharsets.UTF_8.toString())
             return "webview_screen/$encodedUrl"
