@@ -128,6 +128,7 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.core.splashscreen)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.navigation.compose)
 
     // Dependency Injection (Hilt)
     implementation(libs.hilt.android)

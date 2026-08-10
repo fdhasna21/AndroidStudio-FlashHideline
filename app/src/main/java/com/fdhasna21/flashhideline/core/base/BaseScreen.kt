@@ -1,15 +1,26 @@
 package com.fdhasna21.flashhideline.core.base
 
 import android.widget.Toast
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
@@ -25,6 +36,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.res.painterResource
+import com.fdhasna21.flashhideline.R
+import com.fdhasna21.flashhideline.core.theme.FlashHidelineTheme
+import com.fdhasna21.flashhideline.core.utils.component.ThemePreviews
 
 
 /**
@@ -34,38 +49,19 @@ import androidx.compose.runtime.remember
 @Composable
 fun <T> BaseScreen(
     viewModel: BaseViewModel<out T>,
+    showBackButton: Boolean = false,
+    onBackClick: () -> Unit = {},
     content: @Composable (data: T?) -> Unit
 ) {
     val context = LocalContext.current
-
-    /**
-     *  UI State (persistent when screen config change: rotation)
-     *  */
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    Box(modifier = Modifier.fillMaxSize()) {
-        val successData = (uiState as? UiState.Success)?.data
-        content(successData)
 
-        if (uiState is UiState.Loading) {
-            Dialog(
-                onDismissRequest = {},
-                properties = DialogProperties(dismissOnBackPress = false, dismissOnClickOutside = false)
-            ) {
-                Surface(
-                    shape = RoundedCornerShape(12.dp),
-                    color = Color.White
-                ) {
-                    Box(
-                        modifier = Modifier.padding(24.dp),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        CircularProgressIndicator()
-                    }
-                }
-            }
-        }
-    }
-
+    BaseContent(
+        uiState = uiState,
+        showBackButton = showBackButton,
+        onBackClick = onBackClick,
+        content = content
+    )
 
     /**
      *  UI Effect (one-time event: Toast, Snackbar, Dialog)
@@ -100,5 +96,110 @@ fun <T> BaseScreen(
                 }
             }
         )
+    }
+}
+
+/** Used for previewing UI **/
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun <T> BaseContent(
+    uiState: UiState<T> = UiState.Idle,
+    showBackButton: Boolean = false,
+    onBackClick: () -> Unit = {},
+    content: @Composable (data: T?) -> Unit
+) {
+    Scaffold(
+        topBar = {
+            CenterAlignedTopAppBar(
+                title = {
+                    Image(
+                        painter = painterResource(id = R.drawable.ic_logo_horizontal),
+                        contentDescription = "App Logo",
+                        modifier = Modifier.size(120.dp)
+                    )
+                },
+                navigationIcon = {
+                    if (showBackButton) {
+                        IconButton(onClick = onBackClick) {
+                            Icon(
+                                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                                contentDescription = "Back"
+                            )
+                        }
+                    }
+                },
+                colors = TopAppBarDefaults.centerAlignedTopAppBarColors()
+            )
+        }
+    ) { innerPadding ->
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(innerPadding)
+        ) {
+            val successData = (uiState as? UiState.Success)?.data
+            content(successData)
+
+            /**
+             *  UI State (persistent when screen config change: rotation)
+             *  */
+            if (uiState is UiState.Loading) {
+                Dialog(
+                    onDismissRequest = {},
+                    properties = DialogProperties(
+                        dismissOnBackPress = false,
+                        dismissOnClickOutside = false
+                    )
+                ) {
+                    Surface(
+                        shape = RoundedCornerShape(12.dp),
+                        color = Color.White
+                    ) {
+                        Box(
+                            modifier = Modifier.padding(24.dp),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            CircularProgressIndicator()
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@ThemePreviews
+@Composable
+private fun BaseContentSuccessPreview() {
+    FlashHidelineTheme {
+        BaseContent<String>(
+            uiState = UiState.Success("Data Dummy"),
+            showBackButton = true
+        ) { data ->
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(text = "Konten Screen: $data")
+            }
+        }
+    }
+}
+
+@ThemePreviews
+@Composable
+private fun BaseContentLoadingPreview() {
+    FlashHidelineTheme {
+        BaseContent<Unit>(
+            uiState = UiState.Loading,
+            showBackButton = true
+        ) {
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(text = "Konten Utama Tertutup Loading")
+            }
+        }
     }
 }

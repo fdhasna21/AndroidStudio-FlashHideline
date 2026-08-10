@@ -13,8 +13,6 @@ import androidx.compose.ui.platform.LocalContext
 private val DarkColorScheme = darkColorScheme(
     primary = AccentElectricAmber,
     onPrimary = PrimaryDeepSlate,
-    background = DarkBackground,       // #1E293B (Deep Slate)
-    surface = DarkSurface,
     onBackground = DarkOnBackground,   // #FAFAFA
     onSurface = DarkOnBackground
 )
@@ -23,8 +21,6 @@ private val LightColorScheme = lightColorScheme(
     primary = PrimaryDeepSlate,
     onPrimary = LightBackground,
     secondary = AccentElectricAmber,
-    background = LightBackground,      // #FFFFFF (Putih)
-    surface = LightSurface,            // #FAFAFA
     onBackground = LightOnBackground,  // #18181B
     onSurface = LightOnBackground
 )
@@ -32,7 +28,7 @@ private val LightColorScheme = lightColorScheme(
 @Composable
 fun FlashHidelineTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    dynamicColor: Boolean = true,
+    dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
