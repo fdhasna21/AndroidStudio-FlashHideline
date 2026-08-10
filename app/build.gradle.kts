@@ -120,6 +120,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.webkit)
 
     // Jetpack Compose (BOM)
     implementation(platform(libs.androidx.compose.bom))
