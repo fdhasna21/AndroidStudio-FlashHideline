@@ -1,0 +1,110 @@
+{
+  "status": "ok",
+  "totalResults": 35,
+  "articles": [
+    {
+      "source": {
+        "id": "the-washington-post",
+        "name": "The Washington Post"
+      },
+      "author": "Natalie Allison",
+      "title": "A twist in the race for Lindsey Graham’s seat: No clear Trump-aligned candidate - The Washington Post",
+      "description": "The president backs Graham’s sister, but each contender in South Carolina’s Senate primary has found themselves out of step with him in some way, and a runoff is likely.",
+      "url": "https://www.washingtonpost.com/politics/2026/08/10/unusual-twist-race-lindsey-grahams-seat-no-clear-trump-candidate/",
+      "urlToImage": "https://www.washingtonpost.com/wp-apps/imrs.php?src=https://cloudfront-us-east-1.images.arcpublishing.com/wapo/MT6ZRQATNWAZT6W2VK472CDPRE.jpg&w=1440",
+      "publishedAt": "2026-08-10T12:29:33Z",
+      "content": "COLUMBIA, S.C. The contest to succeed Lindsey Graham, complete with a crowded field of Republicans, offers a rare dynamic for a red-state primary in the age of President Donald Trump: Theres no clear… [+24 chars]"
+    },
+    {
+      "source": {
+        "id": "the-wall-street-journal",
+        "name": "The Wall Street Journal"
+      },
+      "author": "WSJ",
+      "title": "Boeing to Fold Its Flying-Taxi Venture Into Rival Archer Aviation - WSJ",
+      "description": null,
+      "url": "https://www.wsj.com/business/airlines/boeing-to-fold-its-flying-taxi-venture-into-rival-archer-aviation-b43245d6",
+      "urlToImage": null,
+      "publishedAt": "2026-08-10T12:00:00Z",
+      "content": null
+    },
+    {
+      "source": {
+        "id": "bloomberg",
+        "name": "Bloomberg"
+      },
+      "author": "Sarah Frier",
+      "title": "Intel Selling $15 Billion in Common Stock as AI Demand Booms - Bloomberg.com",
+      "description": "Intel Corp. said it will be offering $15 billion in common stock, taking advantage of renewed interest in its business prospects during the artificial intelligence data center boom.",
+      "url": "https://www.bloomberg.com/news/articles/2026-08-10/intel-selling-15-billion-in-common-stock-to-fund-growth",
+      "urlToImage": "https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iL.8m1746MpA/v0/1200x800.jpg",
+      "publishedAt": "2026-08-10T11:55:21Z",
+      "content": "Intel Corp. said it will be offering $15 billion in common stock, taking advantage of renewed interest in its business prospects during the artificial intelligence data center boom. \r\nThe money will … [+440 chars]"
+    },
+    {
+      "source": {
+        "id": "cbs-news",
+        "name": "CBS News"
+      },
+      "author": "Duarte  Dias",
+      "title": "London police seize $10 million in supercars in one weekend as they fight antisocial driving - CBS News",
+      "description": "One of the vehicles impounded was a Ferrari Monza SP2, which can sell for as much as $5 million at auction.",
+      "url": "https://www.cbsnews.com/news/london-police-supercar-ferrari-seize-impound/",
+      "urlToImage": "https://assets3.cbsnewsstatic.com/hub/i/r/2026/08/10/06836121-3507-4928-964e-7582e3c5d5da/thumbnail/1200x630/73344d2dba13c2bc3e2a4d6687eb8c94/seized-lambourghini-revuelto-first-seizure-of-operation.jpg",
+      "publishedAt": "2026-08-10T10:58:00Z",
+      "content": "London police said Monday they had seized a record $10 million worth of supercars between Friday and Sunday in an operation aimed at curbing antisocial driving.\r\nOfficers from London's Metropolitan P… [+1883 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "BBC News"
+      },
+      "author": "Paul Battison",
+      "title": "'I've cried non-stop' - Ditcheva breaks both hands again - bbc.com",
+      "description": "Dakota Ditcheva says she broke both of her hands during the win over Denise Kielholtz - months after recovering from similar injuries.",
+      "url": "https://www.bbc.com/sport/mixed-martial-arts/articles/ckgde2jxvkeo",
+      "urlToImage": "https://ichef.bbci.co.uk/ace/branded_sport/1200/cpsprodpb/6830/live/45320a80-94a8-11f1-afe9-fb1a837ec5d9.jpg",
+      "publishedAt": "2026-08-10T10:29:42Z",
+      "content": "Dakota Ditcheva says she has \"cried non-stop\" after breaking both of her hands in the win over Denise Kielholtz - just months after recovering from similar injuries.\r\nThe Briton outclassed Kielholtz … [+1450 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "BBC News"
+      },
+      "author": null,
+      "title": "Ocean heat records broken as hottest July temperature recorded - BBC",
+      "description": "Global oceans recorded their hottest July on record, partly fuelled by developing El Niño conditions, as wildfires continue to ravage western Europe.",
+      "url": "https://www.bbc.com/news/articles/cpvw8vmmgrwo",
+      "urlToImage": "https://ichef.bbci.co.uk/news/1024/branded_news/c200/live/ff20a010-94ac-11f1-b2ab-0dd01740f9f6.jpg",
+      "publishedAt": "2026-08-10T10:24:46Z",
+      "content": "France, Spain, parts of Germany and the UK recorded exceptionally low rainfall and/or soil moisture, while soil moisture levels across much of western Europe were significantly lower than in 2022, wh… [+40 chars]"
+    },
+    {
+      "source": {
+        "id": "fox-news",
+        "name": "Fox News"
+      },
+      "author": null,
+      "title": "Sports media hits all-time low in coverage of DiJonai Carrington and Sophie Cunningham - Fox News",
+      "description": "DiJonai Carrington's flagrant foul ejection and \"white privilege\" post sparked debate as Jemele Hill and media figures rushed to her defense.",
+      "url": "https://www.foxnews.com/outkick-sports/sports-media-hits-all-time-low-coverage-dijonai-carrington-sophie-cunningham",
+      "urlToImage": "https://static.foxnews.com/foxnews.com/content/uploads/2026/08/cunningham-carrington-cheap-shot.jpg",
+      "publishedAt": "2026-08-10T10:23:07Z",
+      "content": "If you thought DiJonai Carrington clotheslining Sophie Cunningham, then posting \"White privilege\" from the locker room after her ejection, would cause the sports media to acknowledge the actual racis… [+7294 chars]"
+    },
+    {
+      "source": {
+        "id": "cnn",
+        "name": "CNN"
+      },
+      "author": "Alima Williams",
+      "title": "Pain, stigma and barriers to care: The burden of cysts and fibroids in Africa - CNN",
+      "description": "Kenyan professional bodybuilder Evelyn Okinyi Owala has made it her life’s mission to educate women on reproductive health issues.",
+      "url": "https://www.cnn.com/health/pain-stigma-and-barriers-to-care-the-burden-of-cysts-and-fibroids-in-africa-spc",
+      "urlToImage": "https://media.cnn.com/api/v1/images/stellar/prod/43744.jpg?c=16x9&q=w_800,c_fill",
+      "publishedAt": "2026-08-10T09:31:26Z",
+      "content": "As a teenager in Kenya, long before Evelyn Okinyi Owala became a professional bodybuilder, she attended school, spent time with friends and helped her parents around the house. But during her period … [+7426 chars]"
+    }
+  ]
+}

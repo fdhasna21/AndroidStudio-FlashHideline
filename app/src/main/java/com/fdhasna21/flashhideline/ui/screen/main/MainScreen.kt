@@ -31,6 +31,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.fdhasna21.flashhideline.data.model.item.ArticleItem
+import com.fdhasna21.flashhideline.data.model.item.SourceItem
 import com.fdhasna21.flashhideline.ui.component.CustomBottomBar
 
 /**
@@ -40,20 +43,25 @@ import com.fdhasna21.flashhideline.ui.component.CustomBottomBar
 
 @Composable
 fun MainScreen(
-    viewModel: MainViewModel
+    viewModel: MainViewModel,
+    onArticleClick: (ArticleItem) -> Unit = {},
+    onSourceClick: (SourceItem) -> Unit = {}
 ) {
     BaseScreen(
         viewModel = viewModel,
         showBackButton = false
     ) { data ->
-        MainContent()
+        MainContent(
+            onArticleClick = onArticleClick,
+            onSourceClick = onSourceClick
+        )
     }
 }
 
 @Composable
 fun MainContent(
-    selectedItem: BottomNavItem = BottomNavItem.News,
-    onTabSelected: (BottomNavItem) -> Unit = {},
+    onArticleClick: (ArticleItem) -> Unit = {},
+    onSourceClick: (SourceItem) -> Unit = {},
     content: (@Composable (PaddingValues) -> Unit)? = null
 ) {
     val bottomNavController = rememberNavController()
@@ -85,13 +93,15 @@ fun MainContent(
         NavHost(
             navController = bottomNavController,
             startDestination = BottomNavItem.News.route,
-            modifier = Modifier.padding(innerPadding)
+            modifier = Modifier.padding(
+                bottom = innerPadding.calculateBottomPadding()
+            )
         ) {
             composable(BottomNavItem.News.route) {
-                NewsScreen()
+                NewsScreen(hiltViewModel(), onArticleClick = onArticleClick)
             }
             composable(BottomNavItem.Sources.route) {
-                SourcesScreen()
+                SourcesScreen(hiltViewModel())
             }
             composable(BottomNavItem.Settings.route) {
                 SettingsScreen()

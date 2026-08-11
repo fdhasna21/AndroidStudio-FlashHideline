@@ -1,11 +1,13 @@
 package com.fdhasna21.flashhideline.core.di
 
+import com.fdhasna21.flashhideline.data.repository.DummyNewsRepositoryImpl
 import com.fdhasna21.flashhideline.data.repository.NewsRepository
 import com.fdhasna21.flashhideline.data.repository.NewsRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Qualifier
 import javax.inject.Singleton
 
 /**
@@ -15,10 +17,20 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class RepositoryModule {
-
     @Binds
     @Singleton
     abstract fun bindNewsRepository(
         newsRepositoryImpl: NewsRepositoryImpl
     ): NewsRepository
+
+    @DummyRepository
+    @Binds
+    @Singleton
+    abstract fun bindDummyNewsRepository(
+        newsRepositoryImpl: DummyNewsRepositoryImpl
+    ): NewsRepository
 }
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class DummyRepository

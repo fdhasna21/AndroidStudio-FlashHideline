@@ -16,6 +16,7 @@ webkit = "1.12.0"
 composeBom = "2024.09.00"
 hiltNavigationCompose = "1.2.0"
 navigationCompose = "2.8.3"
+coil = "2.6.0"
 
 # Network
 retrofit = "2.11.0"
@@ -49,6 +50,8 @@ androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-toolin
 androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "androidx-core-splashscreen" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
+androidx-compose-material-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended" }
+coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
 
 # Compose Testing
 androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }

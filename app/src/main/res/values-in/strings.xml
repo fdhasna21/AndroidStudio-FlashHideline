@@ -5,6 +5,24 @@
     <string name="cannot_connect_toserver">Tidak dapat berkomunikasi dengan sever, coba beberapa saat lagi atau silakan cek aplikasi terbaru</string>
     <string name="no_internet_connection">Masalah jaringan, cek koneksi internet Anda dan silakan coba lagi</string>
 
-<!-- Dialog -->
+<!-- Component -->
     <string name="warning">Peringatan</string>
+    <string name="search_bar_placeholder">Cari disini</string>
+    <string name="no_data_found">Data tidak ditermukan.</string>
+    <string name="time_just_now">Baru saja</string>
+    <string name="time_minutes_ago">%1$d min lalu</string>
+    <string name="time_hours_ago">%1$d jam lalu</string>
+    <string name="time_yesterday">Kemarin</string>
+    <string name="time_days_ago">%1$d hari lalu</string>
+
+<!-- News Screen -->
+    <string name="news_title">Berita</string>
+    <string name="news_desc">Berita utama dari seluruh dunia</string>
+
+<!-- Sources Screen -->
+    <string name="sources_title">Sumber</string>
+    <string name="source_desc">Daftar penerbit dan saluran berita terpercaya</string>
+
+<!-- Settings Screen -->
+    <string name="settings_title">Pengaturan</string>
 </resources>

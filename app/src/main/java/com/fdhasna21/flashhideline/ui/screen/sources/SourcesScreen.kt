@@ -18,7 +18,9 @@ import com.fdhasna21.flashhideline.ui.screen.main.MainContent
  * **/
 
 @Composable
-fun SourcesScreen() {
+fun SourcesScreen(
+    viewModel: SourcesViewModel
+) {
     SourcesContent()
 }
 
@@ -42,7 +44,7 @@ fun SourcesScreenPreview() {
         BaseContent(showBackButton = false) {
             MainContent { innerPadding ->
                 Box(modifier = Modifier.padding(innerPadding)) {
-                    SourcesScreen()
+                    SourcesContent()
                 }
             }
         }

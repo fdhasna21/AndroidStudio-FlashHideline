@@ -31,6 +31,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.fdhasna21.flashhideline.core.theme.AccentElectricAmber
 import com.fdhasna21.flashhideline.core.theme.AccentElectricAmberContainer
@@ -84,7 +85,7 @@ fun CustomBottomBar(
                         ) {
                             Icon(
                                 imageVector = item.icon,
-                                contentDescription = item.title,
+                                contentDescription = stringResource(id = item.titleRes),
                                 tint = if (isSelected) AccentElectricAmber else MaterialTheme.colorScheme.onSurfaceVariant
                             )
 
@@ -96,7 +97,7 @@ fun CustomBottomBar(
                                 Row {
                                     Spacer(modifier = Modifier.width(6.dp))
                                     Text(
-                                        text = item.title,
+                                        text = stringResource(id = item.titleRes),
                                         style = MaterialTheme.typography.labelMedium,
                                         color = AccentElectricAmber
                                     )
@@ -112,7 +113,7 @@ fun CustomBottomBar(
 
 @ThemePreviews
 @Composable
-fun CustomBottomBarStaticPreview() {
+fun CustomBottomBarPreview() {
     FlashHidelineTheme {
         CustomBottomBar(
             items = listOf(

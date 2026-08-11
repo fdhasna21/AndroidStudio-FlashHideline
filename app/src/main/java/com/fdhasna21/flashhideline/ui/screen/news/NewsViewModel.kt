@@ -1,6 +1,7 @@
 package com.fdhasna21.flashhideline.ui.screen.news
 
 import com.fdhasna21.flashhideline.core.base.BaseViewModel
+import com.fdhasna21.flashhideline.core.di.DummyRepository
 import com.fdhasna21.flashhideline.core.utils.component.asUiText
 import com.fdhasna21.flashhideline.data.model.request.GetEverythingRequest
 import com.fdhasna21.flashhideline.data.model.request.GetHeadlinesRequest
@@ -16,7 +17,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class NewsViewModel @Inject constructor(
-    private val newsRepository: NewsRepository
+    @DummyRepository private val newsRepository: NewsRepository
 ) : BaseViewModel() {
     init {
         getEverything()

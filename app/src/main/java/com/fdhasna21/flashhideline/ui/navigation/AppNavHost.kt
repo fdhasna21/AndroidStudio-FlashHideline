@@ -30,7 +30,17 @@ fun AppNavHost(
     ) {
         composable(route = Screen.Main.route) {
             MainScreen(
-                viewModel = hiltViewModel()
+                viewModel = hiltViewModel(),
+                onArticleClick = { article ->
+                    if (article.url.isNotBlank()) {
+                        navController.navigate(Screen.WebView.createRoute(article.url))
+                    }
+                },
+                onSourceClick = { source ->
+                    if (source.url.isNotBlank()) {
+                        navController.navigate(Screen.WebView.createRoute(source.url))
+                    }
+                }
             )
         }
 

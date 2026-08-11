@@ -6,7 +6,25 @@
     <string name="cannot_connect_toserver">Unable to communicate with server, please try again later or please check the latest application</string>
     <string name="no_internet_connection">Network issue, check your internet connection and please try again later</string>
 
-<!-- Dialog   -->
+<!-- Component   -->
     <string name="warning">Warning</string>
     <string name="ok" translatable="false">OK</string>
+    <string name="search_bar_placeholder">Search here</string>
+    <string name="no_data_found">No data found.</string>
+    <string name="time_just_now">Just now</string>
+    <string name="time_minutes_ago">%1$d m ago</string>
+    <string name="time_hours_ago">%1$d h ago</string>
+    <string name="time_yesterday">Yesterday</string>
+    <string name="time_days_ago">%1$d d ago</string>
+
+<!-- News Screen -->
+    <string name="news_title">News</string>
+    <string name="news_desc">Top headlines from all around the world</string>
+
+<!-- Sources Screen -->
+    <string name="sources_title">Sources</string>
+    <string name="source_desc">Discover trusted news outlets and publishers</string>
+
+    <!-- Settings Screen -->
+    <string name="settings_title">Settings</string>
 </resources>
