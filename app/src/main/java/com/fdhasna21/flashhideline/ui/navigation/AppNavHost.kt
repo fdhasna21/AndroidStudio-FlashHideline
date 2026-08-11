@@ -10,7 +10,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.fdhasna21.flashhideline.core.utils.Constants
-import com.fdhasna21.flashhideline.ui.screen.main.MainScreen
+import com.fdhasna21.flashhideline.ui.screen.references.main.MainScreen
 import com.fdhasna21.flashhideline.ui.screen.webview.WebViewScreen
 
 /**

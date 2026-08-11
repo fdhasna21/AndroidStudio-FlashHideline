@@ -1,13 +1,8 @@
-package com.fdhasna21.flashhideline.ui.screen.main
+package com.fdhasna21.flashhideline.ui.screen.references.main
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Icon
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -21,16 +16,9 @@ import com.fdhasna21.flashhideline.core.utils.component.ThemePreviews
 import com.fdhasna21.flashhideline.ui.navigation.BottomNavItem
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.fdhasna21.flashhideline.core.theme.AccentElectricAmber
-import com.fdhasna21.flashhideline.core.theme.AccentElectricAmberContainer
-import com.fdhasna21.flashhideline.ui.screen.news.NewsScreen
-import com.fdhasna21.flashhideline.ui.screen.settings.SettingsScreen
-import com.fdhasna21.flashhideline.ui.screen.sources.SourcesScreen
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.height
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
+import com.fdhasna21.flashhideline.ui.screen.references.news.NewsScreen
+import com.fdhasna21.flashhideline.ui.screen.references.settings.SettingsScreen
+import com.fdhasna21.flashhideline.ui.screen.references.sources.SourcesScreen
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.fdhasna21.flashhideline.data.model.item.ArticleItem
 import com.fdhasna21.flashhideline.data.model.item.SourceItem

@@ -1,4 +1,4 @@
-package com.fdhasna21.flashhideline.ui.screen.main
+package com.fdhasna21.flashhideline.ui.screen.references.main
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

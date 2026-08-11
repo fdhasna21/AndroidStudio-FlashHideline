@@ -1,7 +1,6 @@
-package com.fdhasna21.flashhideline.ui.screen.news
+package com.fdhasna21.flashhideline.ui.screen.references.news
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -25,7 +24,6 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
-import com.fdhasna21.flashhideline.core.base.BaseContent
 import com.fdhasna21.flashhideline.core.theme.AccentElectricAmber
 import com.fdhasna21.flashhideline.core.theme.FlashHidelineTheme
 import com.fdhasna21.flashhideline.core.utils.component.ThemePreviews
@@ -33,7 +31,6 @@ import com.fdhasna21.flashhideline.core.utils.ext.toRelativeTime
 import com.fdhasna21.flashhideline.core.utils.ext.toRelativeTimeString
 import com.fdhasna21.flashhideline.data.dummy.HeadlinesDummyProvider
 import com.fdhasna21.flashhideline.data.model.item.ArticleItem
-import com.fdhasna21.flashhideline.ui.screen.main.MainContent
 
 /**
  * Created by Fernanda Hasna on 11/08/2026.

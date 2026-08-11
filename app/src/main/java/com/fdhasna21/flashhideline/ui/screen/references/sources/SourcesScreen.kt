@@ -1,4 +1,4 @@
-package com.fdhasna21.flashhideline.ui.screen.sources
+package com.fdhasna21.flashhideline.ui.screen.references.sources
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import com.fdhasna21.flashhideline.core.base.BaseContent
 import com.fdhasna21.flashhideline.core.theme.FlashHidelineTheme
 import com.fdhasna21.flashhideline.core.utils.component.ThemePreviews
-import com.fdhasna21.flashhideline.ui.screen.main.MainContent
+import com.fdhasna21.flashhideline.ui.screen.references.main.MainContent
 
 /**
  * Created by Fernanda Hasna on 11/08/2026.

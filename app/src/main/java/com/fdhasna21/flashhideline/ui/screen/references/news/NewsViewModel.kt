@@ -1,11 +1,10 @@
-package com.fdhasna21.flashhideline.ui.screen.news
+package com.fdhasna21.flashhideline.ui.screen.references.news
 
 import com.fdhasna21.flashhideline.core.base.BaseViewModel
 import com.fdhasna21.flashhideline.core.di.DummyRepository
 import com.fdhasna21.flashhideline.core.utils.component.asUiText
 import com.fdhasna21.flashhideline.data.model.request.GetEverythingRequest
 import com.fdhasna21.flashhideline.data.model.request.GetHeadlinesRequest
-import com.fdhasna21.flashhideline.data.model.request.GetSourcesRequest
 import com.fdhasna21.flashhideline.data.repository.NewsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject

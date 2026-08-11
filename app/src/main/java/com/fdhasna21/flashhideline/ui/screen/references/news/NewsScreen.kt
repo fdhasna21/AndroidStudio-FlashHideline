@@ -1,4 +1,4 @@
-package com.fdhasna21.flashhideline.ui.screen.news
+package com.fdhasna21.flashhideline.ui.screen.references.news
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -17,7 +17,7 @@ import androidx.compose.ui.Modifier
 import com.fdhasna21.flashhideline.core.base.BaseContent
 import com.fdhasna21.flashhideline.core.theme.FlashHidelineTheme
 import com.fdhasna21.flashhideline.core.utils.component.ThemePreviews
-import com.fdhasna21.flashhideline.ui.screen.main.MainContent
+import com.fdhasna21.flashhideline.ui.screen.references.main.MainContent
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.stringResource
