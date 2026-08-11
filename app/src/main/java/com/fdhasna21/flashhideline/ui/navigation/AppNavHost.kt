@@ -1,4 +1,4 @@
-package com.fdhasna21.flashhideline.navigation
+package com.fdhasna21.flashhideline.ui.navigation
 
 import android.net.Uri
 import androidx.compose.runtime.Composable
@@ -10,9 +10,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.fdhasna21.flashhideline.core.utils.Constants
-import com.fdhasna21.flashhideline.feature.main.MainScreen
-import com.fdhasna21.flashhideline.feature.webview.WebViewScreen
-import com.fdhasna21.flashhideline.feature.webview.WebViewViewModel
+import com.fdhasna21.flashhideline.ui.screen.main.MainScreen
+import com.fdhasna21.flashhideline.ui.webview.WebViewScreen
 
 /**
  * Created by Fernanda Hasna on 11/08/2026.
@@ -31,10 +30,7 @@ fun AppNavHost(
     ) {
         composable(route = Screen.Main.route) {
             MainScreen(
-                viewModel = hiltViewModel(),
-                onOpenWebView = { url ->
-                    navController.navigate(Screen.WebView.createRoute(url))
-                }
+                viewModel = hiltViewModel()
             )
         }
 

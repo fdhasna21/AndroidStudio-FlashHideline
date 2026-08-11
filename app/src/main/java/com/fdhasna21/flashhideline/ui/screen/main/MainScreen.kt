@@ -1,0 +1,110 @@
+package com.fdhasna21.flashhideline.ui.screen.main
+
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
+import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
+import com.fdhasna21.flashhideline.core.base.BaseContent
+import com.fdhasna21.flashhideline.core.base.BaseScreen
+import com.fdhasna21.flashhideline.core.theme.FlashHidelineTheme
+import com.fdhasna21.flashhideline.core.utils.component.ThemePreviews
+import com.fdhasna21.flashhideline.ui.navigation.BottomNavItem
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import com.fdhasna21.flashhideline.core.base.BaseViewModel
+import com.fdhasna21.flashhideline.ui.screen.news.NewsScreen
+import com.fdhasna21.flashhideline.ui.screen.settings.SettingsScreen
+import com.fdhasna21.flashhideline.ui.screen.sources.SourcesScreen
+
+/**
+ * Created by Fernanda Hasna on 10/08/2026.
+ * Updated by Fernanda Hasna on 11/08/2026.
+ * **/
+
+@Composable
+fun MainScreen(
+    viewModel: MainViewModel
+) {
+    BaseScreen(
+        viewModel = viewModel,
+        showBackButton = false
+    ) { data ->
+        MainContent()
+    }
+}
+
+@Composable
+fun MainContent(
+    selectedItem: BottomNavItem = BottomNavItem.News,
+    onTabSelected: (BottomNavItem) -> Unit = {},
+    content: (@Composable (PaddingValues) -> Unit)? = null
+) {
+    val bottomNavController = rememberNavController()
+    val items = listOf(
+        BottomNavItem.News,
+        BottomNavItem.Sources,
+        BottomNavItem.Settings
+    )
+
+    Scaffold(
+        bottomBar = {
+            NavigationBar {
+                val navBackStackEntry by bottomNavController.currentBackStackEntryAsState()
+                val currentRoute = navBackStackEntry?.destination?.route
+
+                items.forEach { item ->
+                    NavigationBarItem(
+                        icon = { Icon(item.icon, contentDescription = item.title) },
+                        label = { Text(item.title) },
+                        selected = currentRoute == item.route,
+                        onClick = {
+                            bottomNavController.navigate(item.route) {
+                                popUpTo(bottomNavController.graph.findStartDestination().id) {
+                                    saveState = true
+                                }
+                                launchSingleTop = true
+                                restoreState = true
+                            }
+                        }
+                    )
+                }
+            }
+        }
+    ) { innerPadding ->
+        NavHost(
+            navController = bottomNavController,
+            startDestination = BottomNavItem.News.route,
+            modifier = Modifier.padding(innerPadding)
+        ) {
+            composable(BottomNavItem.News.route) {
+                NewsScreen()
+            }
+            composable(BottomNavItem.Sources.route) {
+                SourcesScreen()
+            }
+            composable(BottomNavItem.Settings.route) {
+                SettingsScreen()
+            }
+        }
+    }
+}
+
+
+@ThemePreviews
+@Composable
+fun MainScreenPreview() {
+    FlashHidelineTheme {
+        BaseContent() {
+            MainContent()
+        }
+    }
+}

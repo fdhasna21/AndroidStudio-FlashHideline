@@ -1,4 +1,4 @@
-package com.fdhasna21.flashhideline.feature.webview
+package com.fdhasna21.flashhideline.ui.webview
 
 import com.fdhasna21.flashhideline.core.base.BaseViewModel
 import com.fdhasna21.flashhideline.core.utils.component.asUiText

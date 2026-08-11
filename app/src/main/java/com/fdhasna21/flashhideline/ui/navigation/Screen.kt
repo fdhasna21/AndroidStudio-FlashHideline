@@ -1,4 +1,4 @@
-package com.fdhasna21.flashhideline.navigation
+package com.fdhasna21.flashhideline.ui.navigation
 
 import com.fdhasna21.flashhideline.core.utils.Constants
 import java.net.URLEncoder

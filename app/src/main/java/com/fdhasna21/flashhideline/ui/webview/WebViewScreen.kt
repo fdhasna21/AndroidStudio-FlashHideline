@@ -1,4 +1,4 @@
-package com.fdhasna21.flashhideline.feature.webview
+package com.fdhasna21.flashhideline.ui.webview
 
 import android.webkit.WebChromeClient
 import android.webkit.WebView

@@ -1,17 +1,12 @@
-package com.fdhasna21.flashhideline.feature.main
+package com.fdhasna21.flashhideline.ui.screen.news
 
-import androidx.lifecycle.viewModelScope
 import com.fdhasna21.flashhideline.core.base.BaseViewModel
-import com.fdhasna21.flashhideline.core.network.NetworkResult
 import com.fdhasna21.flashhideline.core.utils.component.asUiText
 import com.fdhasna21.flashhideline.data.model.request.GetEverythingRequest
 import com.fdhasna21.flashhideline.data.model.request.GetHeadlinesRequest
 import com.fdhasna21.flashhideline.data.model.request.GetSourcesRequest
-import com.fdhasna21.flashhideline.data.model.response.GetHeadlinesResponse
-import com.fdhasna21.flashhideline.data.model.response.GetSourcesResponse
 import com.fdhasna21.flashhideline.data.repository.NewsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
@@ -20,7 +15,7 @@ import javax.inject.Inject
  * **/
 
 @HiltViewModel
-class MainViewModel @Inject constructor(
+class NewsViewModel @Inject constructor(
     private val newsRepository: NewsRepository
 ) : BaseViewModel() {
     init {
