@@ -29,7 +29,7 @@ android {
         minSdk = 27
         targetSdk = 35
         versionCode = 1
-        versionName = "1.0"
+        versionName = "1.0.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "API_KEY", "\"${localProperties.getProperty("API_KEY") ?: ""}\"")
@@ -57,7 +57,7 @@ android {
         }
         create("prod") {
             dimension = "version"
-            versionCode = 1
+            versionCode = 2
             resValue("string", "app_name", appName)
         }
     }
