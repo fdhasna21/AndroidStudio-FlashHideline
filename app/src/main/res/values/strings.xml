@@ -19,7 +19,7 @@
 
 <!-- News Screen -->
     <string name="news_title">News</string>
-    <string name="news_desc">Top headlines from all around the world</string>
+    <string name="news_desc">Top headlines from all around the world from %1$s</string>
 
 <!-- Sources Screen -->
     <string name="sources_title">Sources</string>

@@ -1,4 +1,4 @@
-package com.fdhasna21.flashhideline.ui.screen.fix.source
+package com.fdhasna21.flashhideline.ui.screen.fix.article
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -9,14 +9,20 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -26,32 +32,33 @@ import androidx.compose.ui.unit.dp
 import com.fdhasna21.flashhideline.R
 import com.fdhasna21.flashhideline.core.base.BaseContent
 import com.fdhasna21.flashhideline.core.base.BaseScreen
+import com.fdhasna21.flashhideline.core.base.BaseViewModel
 import com.fdhasna21.flashhideline.core.theme.FlashHidelineTheme
 import com.fdhasna21.flashhideline.core.utils.component.ThemePreviews
+import com.fdhasna21.flashhideline.data.model.item.ArticleItem
 import com.fdhasna21.flashhideline.data.model.item.SourceItem
+import com.fdhasna21.flashhideline.data.model.response.GetEverythingResponse
+import com.fdhasna21.flashhideline.data.model.response.GetHeadlinesResponse
 import com.fdhasna21.flashhideline.ui.component.CustomSearchBarWithFilter
 import com.fdhasna21.flashhideline.ui.screen.fix.ArticleCategory
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
-import com.fdhasna21.flashhideline.core.base.BaseViewModel
-import com.fdhasna21.flashhideline.data.model.response.GetSourcesResponse
-import com.fdhasna21.flashhideline.ui.screen.references.sources.SourcesItem
-import androidx.compose.foundation.lazy.grid.items
+import com.fdhasna21.flashhideline.ui.screen.fix.source.ArticleSourceViewModel
+import com.fdhasna21.flashhideline.ui.screen.references.news.NewsItem
+import kotlin.text.ifEmpty
 
 /**
  * Created by Fernanda Hasna on 11/08/2026.
  * **/
 
 @Composable
-fun ArticleSourcesScreen(
-    category: ArticleCategory,
+fun ArticleScreen(
+    source: SourceItem,
     viewModel: ArticleSourceViewModel,
     onBackClick: () -> Unit,
-    onSourceSelected: (SourceItem) -> Unit,
+    onArticleSelected: (ArticleItem) -> Unit,
 ) {
     val uiState by viewModel.uiState.collectAsState()
-    val response = (uiState as? BaseViewModel.UiState.Success<*>)?.data as? GetSourcesResponse
-    val sources = response?.sources ?: emptyList()
+    val response = (uiState as? BaseViewModel.UiState.Success<*>)?.data as? GetEverythingResponse
+    val articles = response?.articles ?: emptyList()
     var searchQuery by rememberSaveable { mutableStateOf("") }
 
     BaseScreen(
@@ -59,10 +66,10 @@ fun ArticleSourcesScreen(
         showBackButton = true,
         onBackClick = onBackClick
     ) {
-        ArticleSourcesContent(
-            category = category,
-            sources = sources,
-            onSourceSelected = onSourceSelected,
+        ArticleContent(
+            source = source,
+            articles = articles,
+            onArticleSelected = onArticleSelected,
             searchQuery = searchQuery,
             onSearchQueryChange = { searchQuery = it },
             onSearch = { query ->
@@ -73,10 +80,10 @@ fun ArticleSourcesScreen(
 }
 
 @Composable
-fun ArticleSourcesContent(
-    category: ArticleCategory,
-    sources: List<SourceItem> = emptyList(),
-    onSourceSelected: (SourceItem) -> Unit,
+fun ArticleContent(
+    source: SourceItem,
+    articles: List<ArticleItem> = emptyList(),
+    onArticleSelected: (ArticleItem) -> Unit,
     searchQuery: String = "",
     onSearchQueryChange: (String) -> Unit = {},
     onSearch: (String) -> Unit = {},
@@ -85,7 +92,7 @@ fun ArticleSourcesContent(
         modifier = Modifier.fillMaxSize()
     ) {
         Text(
-            text = stringResource(id = R.string.sources_title),
+            text = stringResource(id = R.string.news_title),
             style = MaterialTheme.typography.headlineMedium,
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Left,
@@ -95,7 +102,7 @@ fun ArticleSourcesContent(
         Spacer(modifier = Modifier.height(4.dp))
 
         Text(
-            text = stringResource(id = R.string.source_desc, category.name.lowercase()),
+            text = stringResource(id = R.string.news_desc, source.name),
             style = MaterialTheme.typography.titleMedium,
             fontWeight = FontWeight.Light,
             textAlign = TextAlign.Left,
@@ -115,7 +122,7 @@ fun ArticleSourcesContent(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        if (sources.isEmpty()) {
+        if (articles.isEmpty()) {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -128,22 +135,22 @@ fun ArticleSourcesContent(
                 )
             }
         } else {
-            LazyVerticalGrid(
-                columns = GridCells.Fixed(2),
-                horizontalArrangement = Arrangement.spacedBy(12.dp),
-                verticalArrangement = Arrangement.spacedBy(12.dp),
-                contentPadding = PaddingValues(start = 16.dp, end = 16.dp, bottom = 16.dp),
+            LazyColumn(
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(1f)
             ) {
                 items(
-                    items = sources,
-                    key = { it.id }
-                ) { source ->
-                    SourcesItem(
-                        source = source,
-                        onClick = { onSourceSelected(source) }
+                    items = articles,
+                    key = { article -> article.url.ifEmpty { article.title } }
+                ) { article ->
+                    NewsItem(
+                        article = article,
+                        onClick = { onArticleSelected(article) }
+                    )
+                    HorizontalDivider(
+                        modifier = Modifier.padding(horizontal = 16.dp),
+                        color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f)
                     )
                 }
             }
@@ -153,15 +160,15 @@ fun ArticleSourcesContent(
 
 @ThemePreviews
 @Composable
-private fun ArticleSourcesContentPreview() {
+private fun ArticleContentPreview() {
     FlashHidelineTheme {
         BaseContent(
             showBackButton = true,
             onBackClick = {}
         ) {
-            ArticleSourcesContent(
-                category = ArticleCategory.BUSINESS,
-                onSourceSelected = {}
+            ArticleContent(
+                source = SourceItem(),
+                onArticleSelected = {}
             )
         }
     }

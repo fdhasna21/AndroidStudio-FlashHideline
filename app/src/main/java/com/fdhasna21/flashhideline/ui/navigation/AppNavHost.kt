@@ -10,8 +10,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.fdhasna21.flashhideline.core.utils.Constants
+import com.fdhasna21.flashhideline.data.model.item.SourceItem
 import com.fdhasna21.flashhideline.ui.screen.fix.category.ArticleCategoriesScreen
 import com.fdhasna21.flashhideline.ui.screen.fix.ArticleCategory
+import com.fdhasna21.flashhideline.ui.screen.fix.article.ArticleScreen
 import com.fdhasna21.flashhideline.ui.screen.fix.source.ArticleSourcesScreen
 import com.fdhasna21.flashhideline.ui.screen.references.main.MainScreen
 import com.fdhasna21.flashhideline.ui.screen.webview.WebViewScreen
@@ -86,8 +88,31 @@ fun AppNavHost(
                 category = selectedCategory,
                 viewModel = hiltViewModel(),
                 onBackClick = { navController.popBackStack() },
-                onSourceSelected = { sourceId ->
-                    // Action ketika source dipilih
+                onSourceSelected = { selectedSource ->
+                    navController.currentBackStackEntry?.savedStateHandle?.set(
+                        Constants.EXTRA.SOURCE_ITEM,
+                        selectedSource
+                    )
+                    navController.navigate(Screen.Article.route)
+                }
+            )
+        }
+
+        composable(
+            route = Screen.Article.route
+        ){ backStackEntry ->
+            val selectedSource = navController.previousBackStackEntry
+                ?.savedStateHandle
+                ?.get<SourceItem>(Constants.EXTRA.SOURCE_ITEM) ?: SourceItem()
+
+            ArticleScreen(
+                source = selectedSource,
+                viewModel = hiltViewModel(),
+                onBackClick = { navController.popBackStack() },
+                onArticleSelected = { article ->
+                    if (article.url.isNotBlank()) {
+                        navController.navigate(Screen.WebView.createRoute(article.url))
+                    }
                 }
             )
         }

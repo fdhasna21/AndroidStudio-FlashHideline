@@ -17,7 +17,7 @@
 
 <!-- News Screen -->
     <string name="news_title">Berita</string>
-    <string name="news_desc">Berita utama dari seluruh dunia</string>
+    <string name="news_desc">Berita utama dari seluruh dunia oleh %1$s</string>
 
 <!-- Sources Screen -->
     <string name="sources_title">Sumber</string>

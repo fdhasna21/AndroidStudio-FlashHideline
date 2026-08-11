@@ -8,8 +8,9 @@ object Constants {
     const val BASE_URL = "https://newsapi.org/v2/"
 
     object EXTRA {
-       const val ENCODED_URL = "encodedURL"
+        const val ENCODED_URL = "encodedURL"
         const val ARTICLE_CAT = "articleCategory"
+        const val SOURCE_ITEM = "sourceCategory"
     }
 
     object DEFAULT {

@@ -6,6 +6,7 @@ import java.nio.charset.StandardCharsets
 
 /**
  * Created by Fernanda Hasna on 11/08/2026.
+ * Updated by Fernanda Hasna on 11/08/2026.
  * **/
 
 sealed class Screen(val route: String) {
@@ -23,5 +24,5 @@ sealed class Screen(val route: String) {
             return "article_sources_screen/$articleCategory"
         }
     }
-
+    object Article : Screen("article_screen")
 }
