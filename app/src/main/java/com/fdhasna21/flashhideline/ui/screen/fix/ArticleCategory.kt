@@ -22,7 +22,7 @@ enum class ArticleCategory(
     @StringRes val labelRes: Int,
     val icon: ImageVector
 ) {
-    ALL("all", R.string.category_all, Icons.Outlined.Public),
+    ALL("", R.string.category_all, Icons.Outlined.Public),
     BUSINESS("business", R.string.category_business, Icons.Outlined.BusinessCenter),
     ENTERTAINMENT("entertainment", R.string.category_entertainment, Icons.Outlined.Movie),
     GENERAL("general", R.string.category_general, Icons.Outlined.Newspaper),

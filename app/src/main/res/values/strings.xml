@@ -16,6 +16,8 @@
     <string name="time_hours_ago">%1$d h ago</string>
     <string name="time_yesterday">Yesterday</string>
     <string name="time_days_ago">%1$d d ago</string>
+    <string name="disclaimer_title">Disclaimer</string>
+    <string name="disclaimer_search_local_message">The search feature is performed locally and there is no pagination mechanism as it is not provided by the API.</string>
 
 <!-- News Screen -->
     <string name="news_title">News</string>

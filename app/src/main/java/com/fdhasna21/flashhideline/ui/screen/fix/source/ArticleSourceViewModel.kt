@@ -65,7 +65,7 @@ class ArticleSourceViewModel @Inject constructor(
             call = {
                 newsRepository.getSources(
                     GetSourcesRequest().apply {
-                        this.category = category
+                        this.category = category.ifBlank { null }
                     }
                 )
             },

@@ -14,6 +14,8 @@
     <string name="time_hours_ago">%1$d jam lalu</string>
     <string name="time_yesterday">Kemarin</string>
     <string name="time_days_ago">%1$d hari lalu</string>
+    <string name="disclaimer_title">Disclaimer</string>
+    <string name="disclaimer_search_local_message">Fitur pencarian dilakukan secara lokal dan tidak ada mekanisme pagination karena tidak disediakan dari API terkait.</string>
 
 <!-- News Screen -->
     <string name="news_title">Berita</string>
