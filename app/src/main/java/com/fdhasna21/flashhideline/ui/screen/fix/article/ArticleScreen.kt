@@ -43,6 +43,7 @@ import com.fdhasna21.flashhideline.ui.component.CustomSearchBarWithFilter
 import com.fdhasna21.flashhideline.ui.screen.references.news.NewsItem
 import kotlin.text.ifEmpty
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material3.LinearProgressIndicator
 import com.fdhasna21.flashhideline.core.utils.component.OnBottomReached
 
 /**
@@ -57,7 +58,7 @@ fun ArticleScreen(
     onArticleSelected: (ArticleItem) -> Unit,
 ) {
     val articles by viewModel.articles.collectAsState()
-    var searchQuery by rememberSaveable { mutableStateOf("") }
+    val searchQuery by viewModel.searchQuery.collectAsState()
 
     BaseScreen(
         viewModel = viewModel,
@@ -67,14 +68,11 @@ fun ArticleScreen(
         ArticleContent(
             source = source,
             articles = articles,
-            isPaginateLoading = viewModel.isPaginateLoading,
-            onLoadNextPage = { viewModel.loadNextPage(searchQuery) },
+            isInlineLoading = viewModel.isInlineLoading,
+            onLoadNextPage = viewModel::loadNextPage,
             onArticleSelected = onArticleSelected,
             searchQuery = searchQuery,
-            onSearchQueryChange = {
-                searchQuery = it
-                viewModel.onSearch(it)
-            },
+            onSearchQueryChange = viewModel::onSearchQueryChange,
         )
     }
 }
@@ -83,7 +81,7 @@ fun ArticleScreen(
 fun ArticleContent(
     source: SourceItem,
     articles: List<ArticleItem> = emptyList(),
-    isPaginateLoading: Boolean = false,
+    isInlineLoading: Boolean = false,
     onLoadNextPage: () -> Unit = {},
     onArticleSelected: (ArticleItem) -> Unit,
     searchQuery: String = "",
@@ -97,6 +95,19 @@ fun ArticleContent(
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(12.dp),
+            contentAlignment = Alignment.Center
+        ) {
+            if (isInlineLoading) {
+                LinearProgressIndicator(
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
+        }
+
         Text(
             text = stringResource(id = R.string.news_title),
             style = MaterialTheme.typography.headlineMedium,
@@ -158,17 +169,6 @@ fun ArticleContent(
                         modifier = Modifier.padding(horizontal = 16.dp),
                         color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f)
                     )
-                }
-
-                if (isPaginateLoading) {
-                    item {
-                        CircularProgressIndicator(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(16.dp)
-                                .wrapContentWidth(Alignment.CenterHorizontally)
-                        )
-                    }
                 }
             }
         }

@@ -19,6 +19,9 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.viewModelScope
 import com.fdhasna21.flashhideline.core.network.NetworkResult
 import com.fdhasna21.flashhideline.data.model.response.GetEverythingResponse
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.launch
 
 /**
@@ -35,38 +38,59 @@ class ArticleViewModel @Inject constructor(
     private val _articles = MutableStateFlow<List<ArticleItem>>(emptyList())
     val articles: StateFlow<List<ArticleItem>> = _articles.asStateFlow()
 
+    val searchQuery = MutableStateFlow("")
+
     private var currentPage = 1
     private val PAGE_SIZE = 10
 
     var canPaginate by mutableStateOf(false)
         private set
 
-    var isPaginateLoading by mutableStateOf(false)
+    var isInlineLoading by mutableStateOf(false)
         private set
 
     init {
         getEverything()
+        viewModelScope.launch {
+            searchQuery
+                .drop(1)
+                .debounce(500L)
+                .distinctUntilChanged()
+                .collect { query ->
+                    performSearch(query)
+                }
+        }
     }
 
-    /** Fetch from Cloud **/
-    fun getEverything(q: String = "") {
-        if (currentPage == 1) {
-            launchNetwork(
-                call = { fetchNewsFromRepository(q) },
-                onSuccess = { response -> handleSuccessResponse(response) }
-            )
-        } else {
-            isPaginateLoading = true
-            viewModelScope.launch {
-                when (val result = fetchNewsFromRepository(q)) {
-                    is NetworkResult.Success -> {
-                        isPaginateLoading = false
-                        handleSuccessResponse(result.data)
-                    }
-                    is NetworkResult.Error -> {
-                        isPaginateLoading = false
-                        sendEffect(UiEffect.ShowToast(result.message))
-                    }
+    private fun performSearch(query: String) {
+        currentPage = 1
+        canPaginate = false
+        fetchInlineData(query)
+    }
+
+    fun onSearchQueryChange(newQuery: String) {
+        searchQuery.value = newQuery
+    }
+
+    fun getEverything(q: String = searchQuery.value) {
+        launchNetwork(
+            call = { fetchNewsFromRepository(q) },
+            onSuccess = { response -> handleSuccessResponse(response) }
+        )
+    }
+
+    private fun fetchInlineData(query: String) {
+        isInlineLoading = true
+        viewModelScope.launch {
+            when (val result = fetchNewsFromRepository(query)) {
+                is NetworkResult.Success -> {
+                    isInlineLoading = false
+                    handleSuccessResponse(result.data)
+                }
+                is NetworkResult.Error -> {
+                    isInlineLoading = false
+                    if (currentPage > 1) currentPage--
+                    sendEffect(UiEffect.ShowToast(result.message))
                 }
             }
         }
@@ -76,7 +100,7 @@ class ArticleViewModel @Inject constructor(
         return newsRepository.getEverything(
             GetEverythingRequest().apply {
                 this.sources = source.id
-                this.q = q
+                this.q = q.ifBlank { null }
                 this.page = currentPage
                 this.pageSize = PAGE_SIZE
             }
@@ -91,15 +115,10 @@ class ArticleViewModel @Inject constructor(
         canPaginate = currentPage < maxPage && newArticles.isNotEmpty()
     }
 
-    fun loadNextPage(q: String = "") {
-        if (canPaginate && !isPaginateLoading) {
+    fun loadNextPage() {
+        if (canPaginate && !isInlineLoading) {
             currentPage++
-            getEverything(q)
+            fetchInlineData(searchQuery.value)
         }
-    }
-
-    fun onSearch(q: String) {
-        currentPage = 1
-        getEverything(q)
     }
 }
