@@ -52,12 +52,11 @@ android {
         create("dev") {
             dimension = "version"
             versionCode = 1000
-            applicationIdSuffix = ".dev"
             resValue("string", "app_name", "$appName-DEV")
         }
         create("prod") {
             dimension = "version"
-            versionCode = 2
+            versionCode = 3
             resValue("string", "app_name", appName)
         }
     }
