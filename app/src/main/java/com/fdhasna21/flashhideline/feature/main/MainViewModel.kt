@@ -4,8 +4,11 @@ import androidx.lifecycle.viewModelScope
 import com.fdhasna21.flashhideline.core.base.BaseViewModel
 import com.fdhasna21.flashhideline.core.network.NetworkResult
 import com.fdhasna21.flashhideline.core.utils.component.asUiText
+import com.fdhasna21.flashhideline.data.model.request.GetEverythingRequest
 import com.fdhasna21.flashhideline.data.model.request.GetHeadlinesRequest
+import com.fdhasna21.flashhideline.data.model.request.GetSourcesRequest
 import com.fdhasna21.flashhideline.data.model.response.GetHeadlinesResponse
+import com.fdhasna21.flashhideline.data.model.response.GetSourcesResponse
 import com.fdhasna21.flashhideline.data.repository.NewsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -21,8 +24,33 @@ class MainViewModel @Inject constructor(
     private val newsRepository: NewsRepository
 ) : BaseViewModel() {
     init {
-        getTopHeadlines()
+        getEverything()
     }
+
+    /** Fetch from Cloud **/
+    fun getEverything(
+        sortBy: String = "",
+        q: String = ""
+    ){
+        launchNetwork (
+            call = {
+                newsRepository.getEverything(
+                    GetEverythingRequest().apply {
+                        this.sortBy = sortBy
+                        this.q = q
+                    }
+                )
+            },
+            onSuccess = { response ->
+                sendEffect(
+                    UiEffect.ShowToast(
+                        "Berhasil memuat ${response.articles.size ?: 0} berita".asUiText()
+                    )
+                )
+            }
+        )
+    }
+
 
     fun getTopHeadlines(
         category: String = "",
@@ -41,6 +69,29 @@ class MainViewModel @Inject constructor(
                 sendEffect(
                     UiEffect.ShowToast(
                         "Berhasil memuat ${response.articles.size ?: 0} berita".asUiText()
+                    )
+                )
+            }
+        )
+    }
+
+    fun getSources(
+        category: String = "",
+        country: String = ""
+    ) {
+        launchNetwork (
+            call = {
+                newsRepository.getSources(
+                    GetSourcesRequest().apply {
+                        this.country = country
+                        this.category = category
+                    }
+                )
+            },
+            onSuccess = { response ->
+                sendEffect(
+                    UiEffect.ShowToast(
+                        "Berhasil memuat ${response.sources.size ?: 0} berita".asUiText()
                     )
                 )
             }
