@@ -1,0 +1,37 @@
+{
+  "version": 3,
+  "artifactType": {
+    "type": "APK",
+    "kind": "Directory"
+  },
+  "applicationId": "com.fdhasna21.flashhideline",
+  "variantName": "prodRelease",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "attributes": [],
+      "versionCode": 1,
+      "versionName": "1.0",
+      "outputFile": "Flash Hideline v1.0 - Show & Filter Hidelines ProdRelease.apk"
+    }
+  ],
+  "elementType": "File",
+  "baselineProfiles": [
+    {
+      "minApi": 28,
+      "maxApi": 30,
+      "baselineProfiles": [
+        "baselineProfiles/1/Flash Hideline v1.0 - Show & Filter Hidelines ProdRelease.dm"
+      ]
+    },
+    {
+      "minApi": 31,
+      "maxApi": 2147483647,
+      "baselineProfiles": [
+        "baselineProfiles/0/Flash Hideline v1.0 - Show & Filter Hidelines ProdRelease.dm"
+      ]
+    }
+  ],
+  "minSdkVersionForDexing": 27
+}

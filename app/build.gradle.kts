@@ -83,6 +83,27 @@ android {
         }
     }
 
+    variantFilter {
+        val flavorName = flavors.firstOrNull()?.name
+        val buildTypeName = buildType.name
+        if ((flavorName == "dev" && buildTypeName == "release") ||
+            (flavorName == "prod" && buildTypeName == "debug")
+        ) {
+            ignore = true
+        }
+    }
+
+    applicationVariants.all {
+        val variant = this
+        outputs.all {
+            val output = this as? com.android.build.gradle.api.ApkVariantOutput
+            if (output != null) {
+                val formattedVariantName = variant.name.replaceFirstChar { it.uppercase() }
+                output.outputFileName = "$appName v${variant.versionName} - $feature $formattedVariantName.apk"
+            }
+        }
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
@@ -105,12 +126,15 @@ android {
 tasks.whenTaskAdded {
     if (name.startsWith("package") && name.endsWith("Bundle")) {
         val variantName = name.removePrefix("package").removeSuffix("Bundle")
+        val formattedVariant = variantName.replaceFirstChar { it.uppercase() }
+
         tasks.findByName("sign${variantName}Bundle")?.doLast {
-            val bundleDir = file("${layout.buildDirectory.get()}/outputs/bundle/${variantName.decapitalize()}")
-            val unalignedBundle = file("$bundleDir/app-${variantName.decapitalize()}.aab")
-            if (unalignedBundle.exists()) {
-                val newName = "$appName v${android.defaultConfig.versionName} - $feature $variantName.aab"
-                unalignedBundle.renameTo(file("$bundleDir/$newName"))
+            val bundleDir = file("${layout.buildDirectory.get()}/outputs/bundle/${variantName.replaceFirstChar { it.lowercase() }}")
+            val defaultBundle = file("$bundleDir/app-${variantName.replaceFirstChar { it.lowercase() }}.aab")
+
+            if (defaultBundle.exists()) {
+                val newAabName = "$appName v${android.defaultConfig.versionName} - $feature $formattedVariant.aab"
+                defaultBundle.renameTo(file("$bundleDir/$newAabName"))
             }
         }
     }
