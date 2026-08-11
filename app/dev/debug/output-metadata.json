@@ -1,0 +1,21 @@
+{
+  "version": 3,
+  "artifactType": {
+    "type": "APK",
+    "kind": "Directory"
+  },
+  "applicationId": "com.fdhasna21.flashhideline.dev",
+  "variantName": "devDebug",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "attributes": [],
+      "versionCode": 1000,
+      "versionName": "1.0.1",
+      "outputFile": "Flash Hideline v1.0.1 - Show & Filter Hidelines DevDebug.apk"
+    }
+  ],
+  "elementType": "File",
+  "minSdkVersionForDexing": 27
+}

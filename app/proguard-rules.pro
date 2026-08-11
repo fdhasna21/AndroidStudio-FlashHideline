@@ -1,21 +1,42 @@
-# Add project specific ProGuard rules here.
-# You can control the set of applied configuration files using the
-# proguardFiles setting in build.gradle.
-#
-# For more details, see
-#   http://developer.android.com/guide/developing/tools/proguard.html
+# Keep Data Models (DTO / Response Models)
+-keep class com.fdhasna21.flashhideline.data.** { *; }
+-keep class com.fdhasna21.flashhideline.domain.** { *; }
 
-# If your project uses WebView with JS, uncomment the following
-# and specify the fully qualified class name to the JavaScript interface
-# class:
-#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
-#   public *;
-#}
+# Jackson Rules
+-keepattributes *Annotation*,Signature,InnerClasses,EnclosingMethod
+-keep class com.fasterxml.jackson.** { *; }
+-dontwarn com.fasterxml.jackson.**
 
-# Uncomment this to preserve the line number information for
-# debugging stack traces.
-#-keepattributes SourceFile,LineNumberTable
+# Retrofit Rules
+-keepattributes Signature, InnerClasses, EnclosingMethod
+-dontwarn retrofit2.**
+-keep class retrofit2.** { *; }
+-keepclasseswithmembers class * {
+    @retrofit2.http.* <methods>;
+}
 
-# If you keep the line number information, uncomment this to
-# hide the original source file name.
-#-renamesourcefileattribute SourceFile
+# Room Rules
+-keep class * extends androidx.room.RoomDatabase
+-dontwarn androidx.room.**
+
+# Hilt Rules
+-keep class * extends javax.inject.Provider
+
+# Preserve generic signatures for Jackson TypeReference
+-keepattributes Signature, *Annotation*, InnerClasses, EnclosingMethod
+
+# Keep Jackson TypeReference and Core
+-keep class com.fasterxml.jackson.core.type.TypeReference { *; }
+-keepclassmembers class * extends com.fasterxml.jackson.core.type.TypeReference { *; }
+-keep class com.fasterxml.jackson.** { *; }
+-dontwarn com.fasterxml.jackson.**
+
+# Preserve InnerClasses attribute & Signatures
+-keepattributes Signature, InnerClasses, EnclosingMethod, *Annotation*
+
+# Don't obfuscate any anonymous subclass of TypeReference
+-keep class * extends com.fasterxml.jackson.core.type.TypeReference { *; }
+-keepclassmembers class * extends com.fasterxml.jackson.core.type.TypeReference { *; }
+
+# Keep Jackson Core TypeReference
+-keep class com.fasterxml.jackson.core.type.TypeReference { *; }
