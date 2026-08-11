@@ -30,7 +30,7 @@ import com.fdhasna21.flashhideline.core.theme.FlashHidelineTheme
 import com.fdhasna21.flashhideline.core.utils.component.ThemePreviews
 import com.fdhasna21.flashhideline.data.model.item.SourceItem
 import com.fdhasna21.flashhideline.ui.component.CustomSearchBarWithFilter
-import com.fdhasna21.flashhideline.ui.screen.fix.category.ArticleCategory
+import com.fdhasna21.flashhideline.ui.screen.fix.ArticleCategory
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import com.fdhasna21.flashhideline.core.base.BaseViewModel

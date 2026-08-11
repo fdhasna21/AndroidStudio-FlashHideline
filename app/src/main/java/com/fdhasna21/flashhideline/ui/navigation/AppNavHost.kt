@@ -11,7 +11,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.fdhasna21.flashhideline.core.utils.Constants
 import com.fdhasna21.flashhideline.ui.screen.fix.category.ArticleCategoriesScreen
-import com.fdhasna21.flashhideline.ui.screen.fix.category.ArticleCategory
+import com.fdhasna21.flashhideline.ui.screen.fix.ArticleCategory
 import com.fdhasna21.flashhideline.ui.screen.fix.source.ArticleSourcesScreen
 import com.fdhasna21.flashhideline.ui.screen.references.main.MainScreen
 import com.fdhasna21.flashhideline.ui.screen.webview.WebViewScreen

@@ -23,6 +23,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.fdhasna21.flashhideline.core.theme.FlashHidelineTheme
 import com.fdhasna21.flashhideline.core.utils.component.ThemePreviews
+import com.fdhasna21.flashhideline.ui.screen.fix.ArticleCategory
 
 @Composable
 fun ArticleCategoryItem(
