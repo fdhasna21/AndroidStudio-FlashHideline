@@ -69,27 +69,4 @@ class NewsViewModel @Inject constructor(
             }
         )
     }
-
-    fun getSources(
-        category: String = "",
-        country: String = ""
-    ) {
-        launchNetwork (
-            call = {
-                newsRepository.getSources(
-                    GetSourcesRequest().apply {
-                        this.country = country
-                        this.category = category
-                    }
-                )
-            },
-            onSuccess = { response ->
-                sendEffect(
-                    UiEffect.ShowToast(
-                        "Berhasil memuat ${response.sources.size ?: 0} berita".asUiText()
-                    )
-                )
-            }
-        )
-    }
 }
