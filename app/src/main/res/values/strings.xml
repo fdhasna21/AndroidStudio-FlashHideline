@@ -41,4 +41,6 @@
     <string name="category_science">Science</string>
     <string name="category_sports">Sports</string>
     <string name="category_technology">Technology</string>
+
+    <string name="credit_footer">Created by fdhasna21\nAugust 2026</string>
 </resources>

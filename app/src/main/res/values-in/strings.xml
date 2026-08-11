@@ -39,4 +39,6 @@
     <string name="category_science">Sains</string>
     <string name="category_sports">Olahraga</string>
     <string name="category_technology">Teknologi</string>
+
+    <string name="credit_footer">Dibuat oleh fdhasna21\nAgustus 2026</string>
 </resources>
