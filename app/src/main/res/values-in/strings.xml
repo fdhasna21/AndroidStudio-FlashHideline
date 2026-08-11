@@ -21,8 +21,20 @@
 
 <!-- Sources Screen -->
     <string name="sources_title">Sumber</string>
-    <string name="source_desc">Daftar penerbit dan saluran berita terpercaya</string>
+    <string name="source_desc">Daftar penerbit dan saluran berita terpercaya tentang %1$s kategori</string>
 
 <!-- Settings Screen -->
     <string name="settings_title">Pengaturan</string>
+
+<!-- ArticleCategory   -->
+    <string name="category_title">Kategori</string>
+    <string name="select_category_title">Pilih kategori artikel</string>
+    <string name="category_all">Semua</string>
+    <string name="category_business">Bisnis</string>
+    <string name="category_entertainment">Hiburan</string>
+    <string name="category_general">Umum</string>
+    <string name="category_health">Kesehatan</string>
+    <string name="category_science">Sains</string>
+    <string name="category_sports">Olahraga</string>
+    <string name="category_technology">Teknologi</string>
 </resources>

@@ -58,14 +58,15 @@ import com.fdhasna21.flashhideline.R
 @Composable
 fun CustomSearchBarWithFilter(
     query: String,
-    onQueryChange: (String) -> Unit,
-    onSearch: (String) -> Unit,
-    isFilterExpanded: Boolean,
-    onFilterToggle: () -> Unit,
+    onQueryChange: (String) -> Unit = {},
+    onSearch: (String) -> Unit = {},
+    isFilterExpanded: Boolean = false,
+    onFilterToggle: () -> Unit = {},
     modifier: Modifier = Modifier,
     placeholderText: String? = null,
-    isDebounceSearch: Boolean = false, // Flag Mode: false (Enter manual), true (Auto Update)
-    filterContent: @Composable () -> Unit
+    isDebounceSearch: Boolean = false,
+    isFilterVisible: Boolean = true,
+    filterContent: @Composable () -> Unit = {}
 ) {
     val keyboardController = LocalSoftwareKeyboardController.current
     val filterShape = RoundedCornerShape(16.dp)
@@ -137,42 +138,46 @@ fun CustomSearchBarWithFilter(
                 )
             )
 
-            Spacer(modifier = Modifier.width(8.dp))
+            if (isFilterVisible) {
+                Spacer(modifier = Modifier.width(8.dp))
 
-            Box(
-                modifier = Modifier
-                    .size(52.dp)
-                    .clip(filterShape)
-                    .background(
-                        if (isFilterExpanded) AccentElectricAmberContainer
-                        else MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f)
+                Box(
+                    modifier = Modifier
+                        .size(52.dp)
+                        .clip(filterShape)
+                        .background(
+                            if (isFilterExpanded) AccentElectricAmberContainer
+                            else MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f)
+                        )
+                        .clickable(
+                            interactionSource = remember { MutableInteractionSource() },
+                            indication = ripple(color = AccentElectricAmber),
+                            onClick = onFilterToggle
+                        ),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.FilterList,
+                        contentDescription = "Toggle Filter",
+                        tint = if (isFilterExpanded) AccentElectricAmber else MaterialTheme.colorScheme.onSurfaceVariant
                     )
-                    .clickable(
-                        interactionSource = remember { MutableInteractionSource() },
-                        indication = ripple(color = AccentElectricAmber),
-                        onClick = onFilterToggle
-                    ),
-                contentAlignment = Alignment.Center
-            ) {
-                Icon(
-                    imageVector = Icons.Default.FilterList,
-                    contentDescription = "Toggle Filter",
-                    tint = if (isFilterExpanded) AccentElectricAmber else MaterialTheme.colorScheme.onSurfaceVariant
-                )
+                }
             }
         }
 
-        AnimatedVisibility(
-            visible = isFilterExpanded,
-            enter = fadeIn() + expandVertically(),
-            exit = fadeOut() + shrinkVertically()
-        ) {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 8.dp)
+        if (isFilterVisible) {
+            AnimatedVisibility(
+                visible = isFilterExpanded,
+                enter = fadeIn() + expandVertically(),
+                exit = fadeOut() + shrinkVertically()
             ) {
-                filterContent()
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 8.dp)
+                ) {
+                    filterContent()
+                }
             }
         }
     }
@@ -185,13 +190,42 @@ fun CustomSearchBarPreview() {
     var isFilterOpen by rememberSaveable { mutableStateOf(false) }
 
     FlashHidelineTheme {
-        Box(modifier = Modifier.padding(16.dp)) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            verticalArrangement = androidx.compose.foundation.layout.Arrangement.spacedBy(16.dp)
+        ) {
+            CustomSearchBarWithFilter(
+                query = query,
+                onQueryChange = { query = it },
+                onSearch = {},
+                isFilterVisible = false
+            )
+        }
+    }
+}
+
+@ThemePreviews
+@Composable
+fun CustomSearchBarWithFilterPreview() {
+    var query by rememberSaveable { mutableStateOf("") }
+    var isFilterOpen by rememberSaveable { mutableStateOf(false) }
+
+    FlashHidelineTheme {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            verticalArrangement = androidx.compose.foundation.layout.Arrangement.spacedBy(16.dp)
+        ) {
             CustomSearchBarWithFilter(
                 query = query,
                 onQueryChange = { query = it },
                 onSearch = {},
                 isFilterExpanded = isFilterOpen,
                 onFilterToggle = { isFilterOpen = !isFilterOpen },
+                isFilterVisible = true,
                 filterContent = {
                     Text(
                         text = "Sample Filter Content (Dropdown / Chips / Options)",

@@ -16,4 +16,12 @@ sealed class Screen(val route: String) {
             return "webview_screen/$encodedUrl"
         }
     }
+
+    object ArticleCategories : Screen("article_categories_screen")
+    object ArticleSources : Screen("article_sources_screen/{${Constants.EXTRA.ARTICLE_CAT}}"){
+        fun createRoute(articleCategory: String): String {
+            return "article_sources_screen/$articleCategory"
+        }
+    }
+
 }

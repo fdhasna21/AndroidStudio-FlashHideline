@@ -8,6 +8,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.rememberNavController
 import com.fdhasna21.flashhideline.core.theme.FlashHidelineTheme
 import com.fdhasna21.flashhideline.ui.navigation.AppNavHost
+import com.fdhasna21.flashhideline.ui.navigation.Screen
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -25,7 +26,10 @@ class MainActivity : ComponentActivity(){
         setContent {
             FlashHidelineTheme {
                 val navController = rememberNavController()
-                AppNavHost(navController = navController)
+                AppNavHost(
+                    navController = navController,
+                    startDestination = Screen.ArticleCategories.route
+                )
             }
         }
     }

@@ -10,6 +10,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.fdhasna21.flashhideline.core.utils.Constants
+import com.fdhasna21.flashhideline.ui.screen.fix.category.ArticleCategoriesScreen
+import com.fdhasna21.flashhideline.ui.screen.fix.category.ArticleCategory
+import com.fdhasna21.flashhideline.ui.screen.fix.source.ArticleSourcesScreen
 import com.fdhasna21.flashhideline.ui.screen.references.main.MainScreen
 import com.fdhasna21.flashhideline.ui.screen.webview.WebViewScreen
 
@@ -58,6 +61,33 @@ fun AppNavHost(
                 viewModel =  hiltViewModel(),
                 onBackClick = {
                     navController.navigateUp()
+                }
+            )
+        }
+
+        composable(
+            route = Screen.ArticleCategories.route
+        ) {
+            ArticleCategoriesScreen(
+                viewModel = hiltViewModel(),
+                onCategorySelected = { selectedCategory ->
+                    navController.navigate(Screen.ArticleSources.createRoute(selectedCategory.key))
+                }
+            )
+        }
+
+        composable(
+            route = Screen.ArticleSources.route
+        ) { backStackEntry ->
+            val key = backStackEntry.arguments?.getString(Constants.EXTRA.ARTICLE_CAT)
+            val selectedCategory = ArticleCategory.entries.find { it.key == key } ?: ArticleCategory.ALL
+
+            ArticleSourcesScreen(
+                category = selectedCategory,
+                viewModel = hiltViewModel(),
+                onBackClick = { navController.popBackStack() },
+                onSourceSelected = { sourceId ->
+                    // Action ketika source dipilih
                 }
             )
         }

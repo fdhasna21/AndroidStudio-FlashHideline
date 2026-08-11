@@ -9,6 +9,7 @@ object Constants {
 
     object EXTRA {
        const val ENCODED_URL = "encodedURL"
+        const val ARTICLE_CAT = "articleCategory"
     }
 
     object DEFAULT {

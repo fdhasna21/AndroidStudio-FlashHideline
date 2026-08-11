@@ -23,8 +23,20 @@
 
 <!-- Sources Screen -->
     <string name="sources_title">Sources</string>
-    <string name="source_desc">Discover trusted news outlets and publishers</string>
+    <string name="source_desc">Discover trusted news outlets and publishers about %1$s category</string>
 
-    <!-- Settings Screen -->
+<!-- Settings Screen -->
     <string name="settings_title">Settings</string>
+
+<!-- Kategori   -->
+    <string name="category_title">Categories</string>
+    <string name="select_category_title">Select article category</string>
+    <string name="category_all">All</string>
+    <string name="category_business">Business</string>
+    <string name="category_entertainment">Entertainment</string>
+    <string name="category_general">General</string>
+    <string name="category_health">Health</string>
+    <string name="category_science">Science</string>
+    <string name="category_sports">Sports</string>
+    <string name="category_technology">Technology</string>
 </resources>
