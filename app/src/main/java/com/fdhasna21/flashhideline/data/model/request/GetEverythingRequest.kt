@@ -5,8 +5,9 @@ package com.fdhasna21.flashhideline.data.model.request
  * **/
 
 class GetEverythingRequest {
-    var sortBy: String? = null
+    var sources: String? = null
     var q: String? = null
     var page: Int = 1
-    val pageSize: Int = 10
+    var pageSize: Int = 10
+    var sortBy: String? = null
 }

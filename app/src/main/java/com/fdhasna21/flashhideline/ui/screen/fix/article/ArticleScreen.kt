@@ -9,11 +9,14 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -32,18 +35,15 @@ import androidx.compose.ui.unit.dp
 import com.fdhasna21.flashhideline.R
 import com.fdhasna21.flashhideline.core.base.BaseContent
 import com.fdhasna21.flashhideline.core.base.BaseScreen
-import com.fdhasna21.flashhideline.core.base.BaseViewModel
 import com.fdhasna21.flashhideline.core.theme.FlashHidelineTheme
 import com.fdhasna21.flashhideline.core.utils.component.ThemePreviews
 import com.fdhasna21.flashhideline.data.model.item.ArticleItem
 import com.fdhasna21.flashhideline.data.model.item.SourceItem
-import com.fdhasna21.flashhideline.data.model.response.GetEverythingResponse
-import com.fdhasna21.flashhideline.data.model.response.GetHeadlinesResponse
 import com.fdhasna21.flashhideline.ui.component.CustomSearchBarWithFilter
-import com.fdhasna21.flashhideline.ui.screen.fix.ArticleCategory
-import com.fdhasna21.flashhideline.ui.screen.fix.source.ArticleSourceViewModel
 import com.fdhasna21.flashhideline.ui.screen.references.news.NewsItem
 import kotlin.text.ifEmpty
+import androidx.compose.foundation.lazy.rememberLazyListState
+import com.fdhasna21.flashhideline.core.utils.component.OnBottomReached
 
 /**
  * Created by Fernanda Hasna on 11/08/2026.
@@ -56,9 +56,7 @@ fun ArticleScreen(
     onBackClick: () -> Unit,
     onArticleSelected: (ArticleItem) -> Unit,
 ) {
-    val uiState by viewModel.uiState.collectAsState()
-    val response = (uiState as? BaseViewModel.UiState.Success<*>)?.data as? GetEverythingResponse
-    val articles = response?.articles ?: emptyList()
+    val articles by viewModel.articles.collectAsState()
     var searchQuery by rememberSaveable { mutableStateOf("") }
 
     BaseScreen(
@@ -69,12 +67,14 @@ fun ArticleScreen(
         ArticleContent(
             source = source,
             articles = articles,
+            isPaginateLoading = viewModel.isPaginateLoading,
+            onLoadNextPage = { viewModel.loadNextPage(searchQuery) },
             onArticleSelected = onArticleSelected,
             searchQuery = searchQuery,
-            onSearchQueryChange = { searchQuery = it },
-            onSearch = { query ->
-                // ViewModel action jika butuh manual search/trigger
-            }
+            onSearchQueryChange = {
+                searchQuery = it
+                viewModel.onSearch(it)
+            },
         )
     }
 }
@@ -83,11 +83,17 @@ fun ArticleScreen(
 fun ArticleContent(
     source: SourceItem,
     articles: List<ArticleItem> = emptyList(),
+    isPaginateLoading: Boolean = false,
+    onLoadNextPage: () -> Unit = {},
     onArticleSelected: (ArticleItem) -> Unit,
     searchQuery: String = "",
-    onSearchQueryChange: (String) -> Unit = {},
-    onSearch: (String) -> Unit = {},
+    onSearchQueryChange: (String) -> Unit = {}
 ) {
+    val listState = rememberLazyListState()
+    listState.OnBottomReached(buffer = 2) {
+        onLoadNextPage()
+    }
+
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -114,7 +120,6 @@ fun ArticleContent(
         CustomSearchBarWithFilter(
             query = searchQuery,
             onQueryChange = onSearchQueryChange,
-            onSearch = onSearch,
             isFilterVisible = false,
             isDebounceSearch = false,
             modifier = Modifier.padding(horizontal = 16.dp)
@@ -136,6 +141,7 @@ fun ArticleContent(
             }
         } else {
             LazyColumn(
+                state = listState,
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(1f)
@@ -152,6 +158,17 @@ fun ArticleContent(
                         modifier = Modifier.padding(horizontal = 16.dp),
                         color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f)
                     )
+                }
+
+                if (isPaginateLoading) {
+                    item {
+                        CircularProgressIndicator(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(16.dp)
+                                .wrapContentWidth(Alignment.CenterHorizontally)
+                        )
+                    }
                 }
             }
         }

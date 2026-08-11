@@ -10,6 +10,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.fdhasna21.flashhideline.core.utils.Constants
+import com.fdhasna21.flashhideline.core.utils.component.parcelableNavType
 import com.fdhasna21.flashhideline.data.model.item.SourceItem
 import com.fdhasna21.flashhideline.ui.screen.fix.category.ArticleCategoriesScreen
 import com.fdhasna21.flashhideline.ui.screen.fix.ArticleCategory
@@ -94,21 +95,21 @@ fun AppNavHost(
                 viewModel = hiltViewModel(),
                 onBackClick = { navController.popBackStack() },
                 onSourceSelected = { selectedSource ->
-                    navController.currentBackStackEntry?.savedStateHandle?.set(
-                        Constants.EXTRA.SOURCE_ITEM,
-                        selectedSource
-                    )
-                    navController.navigate(Screen.Article.route)
+                    navController.navigate(Screen.Article.createRoute(selectedSource))
                 }
             )
         }
 
         composable(
-            route = Screen.Article.route
+            route = Screen.Article.route,
+            arguments = listOf(
+                navArgument(Constants.EXTRA.SOURCE_ITEM) {
+                    type = parcelableNavType<SourceItem>()
+                }
+            )
         ){ backStackEntry ->
-            val selectedSource = navController.previousBackStackEntry
-                ?.savedStateHandle
-                ?.get<SourceItem>(Constants.EXTRA.SOURCE_ITEM) ?: SourceItem()
+            val selectedSource = backStackEntry.arguments?.getParcelable<SourceItem>(Constants.EXTRA.SOURCE_ITEM)
+                ?: SourceItem()
 
             ArticleScreen(
                 source = selectedSource,

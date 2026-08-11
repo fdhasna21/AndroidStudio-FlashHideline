@@ -7,6 +7,6 @@ import com.fdhasna21.flashhideline.data.model.item.ArticleItem
  * **/
 
 class GetEverythingResponse {
-    val totalResult: Int = 0
+    val totalResults: Int = 0
     val articles: List<ArticleItem> = emptyList()
 }

@@ -1,6 +1,9 @@
 package com.fdhasna21.flashhideline.ui.navigation
 
+import android.net.Uri
 import com.fdhasna21.flashhideline.core.utils.Constants
+import com.fdhasna21.flashhideline.core.utils.component.objectMapper
+import com.fdhasna21.flashhideline.data.model.item.SourceItem
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
 
@@ -24,5 +27,11 @@ sealed class Screen(val route: String) {
             return "article_sources_screen/$articleCategory"
         }
     }
-    object Article : Screen("article_screen")
+    object Article : Screen("article_screen/{${Constants.EXTRA.SOURCE_ITEM}}") {
+        fun createRoute(source: SourceItem): String {
+            val json = objectMapper.writeValueAsString(source)
+            val encodedJson = Uri.encode(json)
+            return "article_screen/$encodedJson"
+        }
+    }
 }
