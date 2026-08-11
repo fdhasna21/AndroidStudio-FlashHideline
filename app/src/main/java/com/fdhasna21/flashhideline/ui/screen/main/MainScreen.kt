@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -20,10 +21,17 @@ import com.fdhasna21.flashhideline.core.utils.component.ThemePreviews
 import com.fdhasna21.flashhideline.ui.navigation.BottomNavItem
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.fdhasna21.flashhideline.core.base.BaseViewModel
+import com.fdhasna21.flashhideline.core.theme.AccentElectricAmber
+import com.fdhasna21.flashhideline.core.theme.AccentElectricAmberContainer
 import com.fdhasna21.flashhideline.ui.screen.news.NewsScreen
 import com.fdhasna21.flashhideline.ui.screen.settings.SettingsScreen
 import com.fdhasna21.flashhideline.ui.screen.sources.SourcesScreen
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.height
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+import com.fdhasna21.flashhideline.ui.component.CustomBottomBar
 
 /**
  * Created by Fernanda Hasna on 10/08/2026.
@@ -54,30 +62,24 @@ fun MainContent(
         BottomNavItem.Sources,
         BottomNavItem.Settings
     )
+    val navBackStackEntry by bottomNavController.currentBackStackEntryAsState()
+    val currentRoute = navBackStackEntry?.destination?.route
 
     Scaffold(
         bottomBar = {
-            NavigationBar {
-                val navBackStackEntry by bottomNavController.currentBackStackEntryAsState()
-                val currentRoute = navBackStackEntry?.destination?.route
-
-                items.forEach { item ->
-                    NavigationBarItem(
-                        icon = { Icon(item.icon, contentDescription = item.title) },
-                        label = { Text(item.title) },
-                        selected = currentRoute == item.route,
-                        onClick = {
-                            bottomNavController.navigate(item.route) {
-                                popUpTo(bottomNavController.graph.findStartDestination().id) {
-                                    saveState = true
-                                }
-                                launchSingleTop = true
-                                restoreState = true
-                            }
+            CustomBottomBar(
+                items = items,
+                currentRoute = currentRoute,
+                onItemClick = { item ->
+                    bottomNavController.navigate(item.route) {
+                        popUpTo(bottomNavController.graph.findStartDestination().id) {
+                            saveState = true
                         }
-                    )
+                        launchSingleTop = true
+                        restoreState = true
+                    }
                 }
-            }
+            )
         }
     ) { innerPadding ->
         NavHost(

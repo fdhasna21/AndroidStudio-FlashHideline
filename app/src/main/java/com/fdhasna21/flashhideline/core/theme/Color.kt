@@ -21,6 +21,7 @@ const val DARK_ON_BACKGROUND_HEX = 0xFFFAFAFA
 // Brand Colors
 val PrimaryDeepSlate = Color(PRIMARY_DEEP_SLATE_HEX)
 val AccentElectricAmber = Color(ACCENT_ELECTRIC_AMBER_HEX)
+val AccentElectricAmberContainer = AccentElectricAmber.copy(alpha = 0.20f)
 
 // Light Theme Colors
 val LightBackground = Color(LIGHT_BACKGROUND_HEX)
