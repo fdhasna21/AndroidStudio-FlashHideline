@@ -52,7 +52,7 @@ import kotlin.text.ifEmpty
 @Composable
 fun ArticleScreen(
     source: SourceItem,
-    viewModel: ArticleSourceViewModel,
+    viewModel: ArticleViewModel,
     onBackClick: () -> Unit,
     onArticleSelected: (ArticleItem) -> Unit,
 ) {

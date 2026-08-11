@@ -45,28 +45,4 @@ class ArticleViewModel @Inject constructor(
             }
         )
     }
-
-
-    fun getTopHeadlines(
-        category: String = "",
-        country: String = ""
-    ) {
-        launchNetwork (
-            call = {
-                newsRepository.getHeadlines(
-                    GetHeadlinesRequest().apply {
-                        this.country = country
-                        this.category = category
-                    }
-                )
-            },
-            onSuccess = { response ->
-                sendEffect(
-                    UiEffect.ShowToast(
-                        "Berhasil memuat ${response.articles.size ?: 0} berita".asUiText()
-                    )
-                )
-            }
-        )
-    }
 }
