@@ -15,8 +15,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -32,9 +30,6 @@ import com.fdhasna21.flashhideline.data.model.item.SourceItem
 import com.fdhasna21.flashhideline.ui.component.CustomSearchBarWithFilter
 import com.fdhasna21.flashhideline.ui.screen.fix.ArticleCategory
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
-import com.fdhasna21.flashhideline.core.base.BaseViewModel
-import com.fdhasna21.flashhideline.data.model.response.GetSourcesResponse
 import com.fdhasna21.flashhideline.ui.screen.references.sources.SourcesItem
 import androidx.compose.foundation.lazy.grid.items
 
@@ -49,10 +44,8 @@ fun ArticleSourcesScreen(
     onBackClick: () -> Unit,
     onSourceSelected: (SourceItem) -> Unit,
 ) {
-    val uiState by viewModel.uiState.collectAsState()
-    val response = (uiState as? BaseViewModel.UiState.Success<*>)?.data as? GetSourcesResponse
-    val sources = response?.sources ?: emptyList()
-    var searchQuery by rememberSaveable { mutableStateOf("") }
+    val sources by viewModel.sources.collectAsState()
+    val searchQuery by viewModel.searchQuery.collectAsState()
 
     BaseScreen(
         viewModel = viewModel,
@@ -64,10 +57,7 @@ fun ArticleSourcesScreen(
             sources = sources,
             onSourceSelected = onSourceSelected,
             searchQuery = searchQuery,
-            onSearchQueryChange = { searchQuery = it },
-            onSearch = { query ->
-                // ViewModel action jika butuh manual search/trigger
-            }
+            onSearchQueryChange = viewModel::onSearchQueryChange
         )
     }
 }
@@ -78,8 +68,7 @@ fun ArticleSourcesContent(
     sources: List<SourceItem> = emptyList(),
     onSourceSelected: (SourceItem) -> Unit,
     searchQuery: String = "",
-    onSearchQueryChange: (String) -> Unit = {},
-    onSearch: (String) -> Unit = {},
+    onSearchQueryChange: (String) -> Unit = {}
 ) {
     Column(
         modifier = Modifier.fillMaxSize()
@@ -107,9 +96,8 @@ fun ArticleSourcesContent(
         CustomSearchBarWithFilter(
             query = searchQuery,
             onQueryChange = onSearchQueryChange,
-            onSearch = onSearch,
             isFilterVisible = false,
-            isDebounceSearch = false,
+            isDebounceSearch = true,
             modifier = Modifier.padding(horizontal = 16.dp)
         )
 

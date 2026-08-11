@@ -1,5 +1,6 @@
 package com.fdhasna21.flashhideline.core.base
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fdhasna21.flashhideline.R
@@ -19,7 +20,9 @@ import kotlinx.coroutines.launch
  * Updated by Fernanda Hasna on 11/08/2026.
  * **/
 
-abstract class BaseViewModel : ViewModel() {
+abstract class BaseViewModel(
+    protected val savedStateHandle: SavedStateHandle? = null
+) : ViewModel() {
     /**
      *  UI State (persistent when screen config change: rotation)
      *  */

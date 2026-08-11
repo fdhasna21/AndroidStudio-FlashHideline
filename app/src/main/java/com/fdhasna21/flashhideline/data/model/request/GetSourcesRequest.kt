@@ -7,5 +7,4 @@ package com.fdhasna21.flashhideline.data.model.request
 class GetSourcesRequest {
     var category: String? = null
     var country: String? = null
-    var page: String? = null
 }

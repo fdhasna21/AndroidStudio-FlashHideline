@@ -79,7 +79,12 @@ fun AppNavHost(
         }
 
         composable(
-            route = Screen.ArticleSources.route
+            route = Screen.ArticleSources.route,
+            arguments = listOf(
+                navArgument(Constants.EXTRA.ARTICLE_CAT) {
+                    type = NavType.StringType
+                }
+            )
         ) { backStackEntry ->
             val key = backStackEntry.arguments?.getString(Constants.EXTRA.ARTICLE_CAT)
             val selectedCategory = ArticleCategory.entries.find { it.key == key } ?: ArticleCategory.ALL
