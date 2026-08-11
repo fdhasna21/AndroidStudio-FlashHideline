@@ -36,6 +36,7 @@ import androidx.compose.material3.LinearProgressIndicator
 
 /**
  * Created by Fernanda Hasna on 11/08/2026.
+ * Updated by Fernanda Hasna on 11/08/2026.
  * **/
 
 @Composable
@@ -82,7 +83,7 @@ fun WebViewScreen(
             }
 
             WebViewContent(
-                url = data ?: "",
+                url = (data as? String) ?: url,
                 onWebViewCreated = { webViewRef = it },
                 onLoadingProgressChanged = { newProgress ->
                     webProgress = newProgress
@@ -159,11 +160,11 @@ fun WebViewContent(
 @Composable
 private fun WebViewScreenPreview() {
     FlashHidelineTheme {
-        BaseContent<String>(
+        BaseContent(
             uiState = UiState.Success(Constants.DEFAULT.URL),
             showBackButton = true
         ) { url ->
-            WebViewContent(url = url ?: "")
+            WebViewContent(url = (url as? String) ?: "")
         }
     }
 }

@@ -7,10 +7,11 @@ import javax.inject.Inject
 
 /**
  * Created by Fernanda Hasna on 11/08/2026.
+ * Updated by Fernanda Hasna on 11/08/2026.
  * **/
 
 @HiltViewModel
-class WebViewViewModel @Inject constructor() : BaseViewModel<String>() {
+class WebViewViewModel @Inject constructor() : BaseViewModel() {
     fun setUrl(url: String) {
         if (url.isNotEmpty()) {
             updateState(UiState.Success(url))

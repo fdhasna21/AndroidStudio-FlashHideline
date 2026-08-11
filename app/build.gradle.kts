@@ -31,6 +31,7 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "API_KEY", "\"${localProperties.getProperty("API_KEY") ?: ""}\"")
     }
 
     signingConfigs {
@@ -138,8 +139,10 @@ dependencies {
 
     // Network (Retrofit & OkHttp)
     implementation(libs.retrofit)
-    implementation(libs.retrofit.converter.gson)
+    implementation(libs.retrofit.converter.jackson)
     implementation(libs.okhttp.logging.interceptor)
+    implementation(libs.jackson.module.kotlin)
+    implementation(libs.jackson.databind)
 
     // Local Storage (Room)
     implementation(libs.room.runtime)

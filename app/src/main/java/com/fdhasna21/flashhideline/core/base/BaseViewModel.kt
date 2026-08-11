@@ -16,9 +16,10 @@ import kotlinx.coroutines.launch
 
 /**
  * Created by Fernanda Hasna on 10/08/2026.
+ * Updated by Fernanda Hasna on 11/08/2026.
  * **/
 
-abstract class BaseViewModel<T> : ViewModel() {
+abstract class BaseViewModel : ViewModel() {
     /**
      *  UI State (persistent when screen config change: rotation)
      *  */
@@ -29,16 +30,16 @@ abstract class BaseViewModel<T> : ViewModel() {
         data class Error(val message: UiText) : UiState<Nothing>
     }
 
-    private val _uiState = MutableStateFlow<UiState<T>>(UiState.Idle)
-    val uiState: StateFlow<UiState<T>> = _uiState.asStateFlow()
+    private val _uiState = MutableStateFlow<UiState<Any?>>(UiState.Idle)
+    val uiState: StateFlow<UiState<Any?>> = _uiState.asStateFlow()
 
-    protected fun updateState(state: UiState<T>) {
+    protected fun updateState(state: UiState<Any?>) {
         _uiState.value = state
     }
 
-    protected fun launchNetwork(
-        call: suspend () -> NetworkResult<T>,
-        onSuccess: (T) -> Unit
+    protected fun <R> launchNetwork(
+        call: suspend () -> NetworkResult<R>,
+        onSuccess: (R) -> Unit
     ) {
         viewModelScope.launch {
             _uiState.value = UiState.Loading

@@ -44,14 +44,15 @@ import com.fdhasna21.flashhideline.core.utils.component.ThemePreviews
 
 /**
  * Created by Fernanda Hasna on 10/08/2026.
+ * Updated by Fernanda Hasna on 11/08/2026.
  * **/
 
 @Composable
-fun <T> BaseScreen(
-    viewModel: BaseViewModel<out T>,
+fun BaseScreen(
+    viewModel: BaseViewModel,
     showBackButton: Boolean = false,
     onBackClick: () -> Unit = {},
-    content: @Composable (data: T?) -> Unit
+    content: @Composable (data: Any?) -> Unit
 ) {
     val context = LocalContext.current
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -102,11 +103,11 @@ fun <T> BaseScreen(
 /** Used for previewing UI **/
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun <T> BaseContent(
-    uiState: UiState<T> = UiState.Idle,
+fun BaseContent(
+    uiState: UiState<Any?> = UiState.Idle,
     showBackButton: Boolean = false,
     onBackClick: () -> Unit = {},
-    content: @Composable (data: T?) -> Unit
+    content: @Composable (data: Any?) -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -172,7 +173,7 @@ fun <T> BaseContent(
 @Composable
 private fun BaseContentSuccessPreview() {
     FlashHidelineTheme {
-        BaseContent<String>(
+        BaseContent(
             uiState = UiState.Success("Data Dummy"),
             showBackButton = true
         ) { data ->
@@ -190,7 +191,7 @@ private fun BaseContentSuccessPreview() {
 @Composable
 private fun BaseContentLoadingPreview() {
     FlashHidelineTheme {
-        BaseContent<Unit>(
+        BaseContent(
             uiState = UiState.Loading,
             showBackButton = true
         ) {
